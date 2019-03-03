@@ -1,9 +1,35 @@
 ﻿<Application x:Class="Streac.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Streac"
-             StartupUri="MainWindow.xaml">
+             xmlns:local="clr-namespace:Streac">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <local:Bootstrapper x:Key="Bootstrapper"/>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="DefaultStyles">
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="{x:Type TextBlock}" x:Key="DefaultText">
+                <Setter Property="Foreground" Value="AliceBlue"/>
+                <Setter Property="FontFamily" Value="Fonts/#Quicksand"/>
+            </Style>
+            <Style TargetType="{x:Type TextBox}">
+                <Setter Property="Foreground" Value="AliceBlue"/>
+                <Setter Property="FontFamily" Value="Fonts/#Quicksand"/>
+                <Setter Property="Background" Value="Black"/>
+                <Setter Property="FontSize" Value="30"/>
+                <Setter Property="BorderThickness" Value="1"/>
+            </Style>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="BorderBrush" Value="#5c5cd6"/>
+                <Setter Property="BorderThickness" Value="2"/>
+                <Setter Property="Foreground" Value="#5c5cd6"/>
+                <Setter Property="Background" Value="Black"/>
+                <Setter Property="FontFamily" Value="Fonts/#Quicksand"/>
+                <Setter Property="FontSize" Value="30"/>
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
