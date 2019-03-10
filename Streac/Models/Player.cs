@@ -12,6 +12,5 @@ namespace Streac.Models
         public string Name { get; set; }
         public object Key { get; set; }
         public int Points { get; set; }
-        public bool Active { get; set; } = false;
     }
 }

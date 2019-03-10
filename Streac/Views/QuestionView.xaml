@@ -12,6 +12,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <converters:StringBrushConverter x:Key="StringToBrush"/>
+        <converters:BoolBrushConverter x:Key="BoolToBrush"/>
     </UserControl.Resources>
     
     <Grid Background="#101010" FocusManager.FocusedElement="{Binding ElementName=TermBox}">
@@ -37,22 +38,22 @@
                                  FilterMode="Contains"
                                  IsTextCompletionEnabled="True"/>
         <StackPanel Grid.Column="0" Grid.Row="2">
-            <TextBlock x:Name="Player1Name" FontSize="30" Style="{StaticResource DefaultText}" TextAlignment="Center"/>
+            <TextBlock x:Name="Player1Name" FontSize="30" Foreground="{Binding Player1Active, Converter={StaticResource BoolToBrush}}" Style="{StaticResource DefaultText}" TextAlignment="Center"/>
             <TextBlock x:Name="Player1Score" FontSize="30" Style="{StaticResource DefaultText}" TextAlignment="Center"/>
         </StackPanel>
         
-        <StackPanel Grid.Column="0" Grid.Row="3">    
-            <TextBlock x:Name="Player2Name" FontSize="30" Style="{StaticResource DefaultText}" TextAlignment="Center"/>
-            <TextBlock x:Name="Player2Score" FontSize="30" Style="{StaticResource DefaultText}" TextAlignment="Center"/>
+        <StackPanel Grid.Column="0" Grid.Row="3">
+            <TextBlock x:Name="Player3Name" FontSize="30" Foreground="{Binding Player3Active, Converter={StaticResource BoolToBrush}}" Style="{StaticResource DefaultText}" TextAlignment="Center"/>
+            <TextBlock x:Name="Player3Score" FontSize="30" Style="{StaticResource DefaultText}" TextAlignment="Center"/>
         </StackPanel>
         
         <StackPanel Grid.Column="3" Grid.Row="2">
-            <TextBlock x:Name="Player3Name" FontSize="30" Style="{StaticResource DefaultText}" TextAlignment="Center"/>
-            <TextBlock x:Name="Player3Score" FontSize="30" Style="{StaticResource DefaultText}" TextAlignment="Center"/>
+            <TextBlock x:Name="Player2Name" Foreground="{Binding Player2Active, Converter={StaticResource BoolToBrush}}" FontSize="30" Style="{StaticResource DefaultText}" TextAlignment="Center"/>
+            <TextBlock x:Name="Player2Score" FontSize="30" Style="{StaticResource DefaultText}" TextAlignment="Center"/>
         </StackPanel>
 
         <StackPanel Grid.Column="3" Grid.Row="3">
-            <TextBlock x:Name="Player4Name" FontSize="30" Style="{StaticResource DefaultText}" TextAlignment="Center"/>
+            <TextBlock x:Name="Player4Name" FontSize="30" Foreground="{Binding Player4Active, Converter={StaticResource BoolToBrush}}" Style="{StaticResource DefaultText}" TextAlignment="Center"/>
             <TextBlock x:Name="Player4Score" FontSize="30" Style="{StaticResource DefaultText}" TextAlignment="Center"/>
         </StackPanel>
     </Grid>

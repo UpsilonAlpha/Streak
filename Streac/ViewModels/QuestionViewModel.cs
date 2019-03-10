@@ -16,6 +16,10 @@ namespace Streac.ViewModels
         Quiz Quiz = new Quiz(MenuViewModel.FileName);
 
         private string _isRight = "No Answer";
+        private string _player1Active = "No";
+        private string _player2Active = "No";
+        private string _player3Active = "No";
+        private string _player4Active = "No";
         private string _selectedTerm;
         private string _answer;
         private string _question;
@@ -68,8 +72,48 @@ namespace Streac.ViewModels
 
         public string Player1Name { get; set; } = PlayerViewModel.Players[0].Name;
         public string Player2Name { get; set; } = PlayerViewModel.Players[1].Name;
+        public string Player3Name { get; set; } = PlayerViewModel.Players[2].Name;
+        public string Player4Name { get; set; } = PlayerViewModel.Players[3].Name;
         public int Player1Score { get; set; } = PlayerViewModel.Players[0].Points;
         public int Player2Score { get; set; } = PlayerViewModel.Players[1].Points;
+        public int Player3Score { get; set; } = PlayerViewModel.Players[2].Points;
+        public int Player4Score { get; set; } = PlayerViewModel.Players[3].Points;
+        public string Player1Active
+        {
+            get { return _player1Active; }
+            set
+            {
+                _player1Active = value;
+                NotifyOfPropertyChange(() => Player1Active);
+            }
+        }
+        public string Player2Active
+        {
+            get { return _player2Active; }
+            set
+            {
+                _player2Active = value;
+                NotifyOfPropertyChange(() => Player2Active);
+            }
+        }
+        public string Player3Active
+        {
+            get { return _player3Active; }
+            set
+            {
+                _player3Active = value;
+                NotifyOfPropertyChange(() => Player3Active);
+            }
+        }
+        public string Player4Active
+        {
+            get { return _player4Active; }
+            set
+            {
+                _player4Active = value;
+                NotifyOfPropertyChange(() => Player4Active);
+            }
+        }
 
         public QuestionViewModel()
         {
@@ -114,21 +158,36 @@ namespace Streac.ViewModels
         {
             var keyArgs = context.EventArgs as System.Windows.Input.KeyEventArgs;
 
-            buzzerPressed = true;
-            if (keyArgs.Key == Key.LeftShift)
-            {
-                currentPlayer = PlayerViewModel.Players[0];
-                currentPlayer.Active = true;
-            }
-            else if (keyArgs.Key == Key.RightShift)
-            {
-                currentPlayer = PlayerViewModel.Players[1];
-                currentPlayer.Active = true;
-            }
-            else if (keyArgs.Key == Key.Enter && buzzerPressed == true)
+            Debug.WriteLine(keyArgs.Key.ToString());
+
+            if (keyArgs.Key == Key.Enter && buzzerPressed == true)
             {
                 AnswerCheck();
             }
+            else if (keyArgs.Key == Key.LeftShift && buzzerPressed != true)
+            {
+                Player1Active = "Yes";
+                currentPlayer = PlayerViewModel.Players[0];
+            }
+            else if (keyArgs.Key == Key.RightShift && buzzerPressed != true)
+            {
+                Player2Active = "Yes";
+                currentPlayer = PlayerViewModel.Players[1];
+            }
+            else if (keyArgs.SystemKey == Key.LeftAlt && buzzerPressed != true)
+            {
+                Player3Active = "Yes";
+                currentPlayer = PlayerViewModel.Players[2];
+                keyArgs.Handled = true;
+            }
+            else if (keyArgs.SystemKey == Key.RightAlt && buzzerPressed != true)
+            {
+                Player4Active = "Yes";
+                currentPlayer = PlayerViewModel.Players[3];
+                keyArgs.Handled = true;
+            }
+
+            buzzerPressed = true;
         }
 
         public void AnswerCheck()
@@ -136,7 +195,10 @@ namespace Streac.ViewModels
             if (Answer == Quiz.GetTerm(currentQuestion))
             {
                 IsRight = "Correct";
-                currentPlayer.Points++;
+                if (currentPlayer != null)
+                {
+                    currentPlayer.Points++;
+                }
             }
 
             else
