@@ -21,6 +21,7 @@
 
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Column="0" Grid.Row="0" Text="Enter code here" Style="{StaticResource DefaultText}" Grid.ColumnSpan="4" FontSize="50" HorizontalAlignment="Center"/>
-        <TextBox x:Name="Code" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0, 80" FontFamily="Fonts/#Quicksand" FontSize="30"/>
+        <TextBox x:Name="Code" Text="{Binding Code, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0, 80" FontFamily="Fonts/#Quicksand" FontSize="30"/>
+        <Button x:Name="SaveFileDialog" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="120, 85" Content="Save"/>
     </Grid>
 </UserControl>

@@ -91,6 +91,7 @@
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\Quiz.cs" />
+    <Compile Include="ViewModels\CreateViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\PlayerViewModel.cs" />
     <Compile Include="ViewModels\QuestionViewModel.cs" />

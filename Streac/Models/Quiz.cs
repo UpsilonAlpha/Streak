@@ -12,7 +12,7 @@ namespace Streac.Models
 
         public Quiz(String filepath)
         {
-            String json = filepath;
+            string json = File.ReadAllText(filepath);
             _questions = JsonConvert.DeserializeObject<List<Question>>(json);
         }
 

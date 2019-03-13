@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using Caliburn.Micro;
 using System.Diagnostics;
 using System.Windows.Input;
+using System.Collections;
 
 namespace Streac.ViewModels
 {
@@ -209,7 +210,6 @@ namespace Streac.ViewModels
             AnswerTimer.Tick += new EventHandler(NextDef);
             AnswerTimer.Interval = 1000;
             AnswerTimer.Start();
-            currentQuestion++;
         }
 
         public void NextDef(object Object, EventArgs eventArgs)
