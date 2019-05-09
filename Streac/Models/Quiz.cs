@@ -9,11 +9,13 @@ namespace Streac.Models
     class Quiz
     {
         private List<Question> _questions;
+        Random random = new Random();
 
         public Quiz(String filepath)
         {
             string json = File.ReadAllText(filepath);
             _questions = JsonConvert.DeserializeObject<List<Question>>(json);
+            _questions = _questions.OrderBy(x => random.Next(_questions.Count())).ToList();
         }
 
         public String GetTerm(int number)

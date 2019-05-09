@@ -14,7 +14,6 @@ namespace Streac.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Debug.WriteLine(value.ToString());
             return value.ToString() == "Yes" ? new SolidColorBrush(Color.FromRgb(92, 92, 214)) : new SolidColorBrush(Colors.AliceBlue);
         }
 

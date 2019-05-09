@@ -29,7 +29,6 @@ namespace Streac.ViewModels
             System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
 
             var URL = "https://api.quizlet.com/2.0/sets/" + Code + "/terms?client_id=R3snf5zu9W&whitespace=1";
-            Debug.WriteLine(URL);
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(URL);
 
             var proxy = WebRequest.GetSystemWebProxy();
@@ -39,7 +38,7 @@ namespace Streac.ViewModels
             if (proxyUrl != testUrl)
             {
                 WebProxy myProxy = new WebProxy("http://proxy2.eq.edu.au:80/");
-                myProxy.Credentials = new NetworkCredential("uadhi2", "ScienceMathTech1");
+                myProxy.Credentials = new NetworkCredential("uadhi2", "ScienceMathTech2");
                 request.Proxy = myProxy;
             }
 

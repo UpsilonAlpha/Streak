@@ -29,8 +29,11 @@
             <ColumnDefinition Width="*"/>
 
         </Grid.ColumnDefinitions>
+
+        <TextBlock Text="5" x:Name="StressNumber" Grid.Column="1" Grid.Row="2" Style="{StaticResource DefaultText}" Foreground="{Binding StressActive, Converter={StaticResource BoolToBrush}}" TextAlignment="Center" FontSize="50" Grid.ColumnSpan="2"/>
+
         <TextBlock x:Name="Question" Grid.Column="0" Grid.Row="0" Text="{Binding Question}" Style="{StaticResource DefaultText}" Grid.ColumnSpan="4" Grid.RowSpan="2" TextWrapping="WrapWithOverflow" FontSize="50" HorizontalAlignment="Center"/>
-        <local:AutoBoxFocus x:Name="TermBox" Grid.Column="1" Grid.Row="2" Height="50" Grid.ColumnSpan="2" Background="#101010" FontFamily="Fonts/#Quicksand" FontSize="30"
+        <local:AutoBoxFocus x:Name="TermBox" Grid.Column="1" Grid.Row="2" Height="50" Grid.ColumnSpan="2" Grid.RowSpan="2" Background="#101010" FontFamily="Fonts/#Quicksand" FontSize="30"
                                  Text="{Binding Answer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  ItemsSource="{Binding Terms}"
                                  SelectedItem="{Binding SelectedTerm, Mode=TwoWay}"
@@ -56,5 +59,7 @@
             <TextBlock x:Name="Player4Name" FontSize="30" Foreground="{Binding Player4Active, Converter={StaticResource BoolToBrush}}" Style="{StaticResource DefaultText}" TextAlignment="Center"/>
             <TextBlock x:Name="Player4Score" FontSize="30" Style="{StaticResource DefaultText}" TextAlignment="Center"/>
         </StackPanel>
+
+        <TextBlock x:Name="CorrectAnswer" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Center" FontSize="30" Style="{StaticResource DefaultText}" Foreground="Green" TextAlignment="Center"/>
     </Grid>
 </UserControl>

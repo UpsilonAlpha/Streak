@@ -24,6 +24,9 @@ namespace Streac.ViewModels
         private string _selectedTerm;
         private string _answer;
         private string _question;
+        private int _stressNumber = 5;
+        private string _stressActive = "No";
+        private string _correctAnswer;
 
         static int currentQuestion = 0;
         bool buzzerPressed = false;
@@ -66,10 +69,38 @@ namespace Streac.ViewModels
                 NotifyOfPropertyChange(() => Question);
             }
         }
+        public int StressNumber
+        {
+            get { return _stressNumber; }
+            set
+            {
+                _stressNumber = value;
+                NotifyOfPropertyChange(() => StressNumber);
+            }
+        }
+        public string StressActive
+        {
+            get { return _stressActive; }
+            set
+            {
+                _stressActive = value;
+                NotifyOfPropertyChange(() => StressActive);
+            }
+        }
+        public string CorrectAnswer
+        {
+            get { return _correctAnswer; }
+            set
+            {
+                _correctAnswer = value;
+                NotifyOfPropertyChange(() => CorrectAnswer);
+            }
+        }
         public Player currentPlayer;
 
         Timer PrinTimer = new Timer();
         Timer AnswerTimer = new Timer();
+        Timer StressTimer = new Timer();
 
         public string Player1Name { get; set; } = PlayerViewModel.Players[0].Name;
         public string Player2Name { get; set; } = PlayerViewModel.Players[1].Name;
@@ -159,7 +190,6 @@ namespace Streac.ViewModels
         {
             var keyArgs = context.EventArgs as System.Windows.Input.KeyEventArgs;
 
-            Debug.WriteLine(keyArgs.Key.ToString());
 
             if (keyArgs.Key == Key.Enter && buzzerPressed == true)
             {
@@ -169,30 +199,41 @@ namespace Streac.ViewModels
             {
                 Player1Active = "Yes";
                 currentPlayer = PlayerViewModel.Players[0];
+                buzzerPressed = true;
             }
             else if (keyArgs.Key == Key.RightShift && buzzerPressed != true)
             {
                 Player2Active = "Yes";
                 currentPlayer = PlayerViewModel.Players[1];
+                buzzerPressed = true;
             }
             else if (keyArgs.SystemKey == Key.LeftAlt && buzzerPressed != true)
             {
                 Player3Active = "Yes";
                 currentPlayer = PlayerViewModel.Players[2];
                 keyArgs.Handled = true;
+                buzzerPressed = true;
             }
             else if (keyArgs.SystemKey == Key.RightAlt && buzzerPressed != true)
             {
                 Player4Active = "Yes";
                 currentPlayer = PlayerViewModel.Players[3];
                 keyArgs.Handled = true;
+                buzzerPressed = true;
             }
 
-            buzzerPressed = true;
+            if (buzzerPressed == true && StressTimer.Interval != 1000)
+            {
+                StressActive = "Yes";
+                StressTimer.Tick += new EventHandler(StressTick);
+                StressTimer.Interval = 1000;
+                StressTimer.Start();
+            }
         }
 
         public void AnswerCheck()
         {
+            StressTimer.Stop();
             if (Answer == Quiz.GetTerm(currentQuestion))
             {
                 IsRight = "Correct";
@@ -206,10 +247,23 @@ namespace Streac.ViewModels
             {
                 IsRight = "Incorrect";
             }
-
+            CorrectAnswer = Quiz.GetTerm(currentQuestion);
+            currentQuestion++;
             AnswerTimer.Tick += new EventHandler(NextDef);
             AnswerTimer.Interval = 1000;
             AnswerTimer.Start();
+        }
+
+        public void StressTick(object Object, EventArgs eventArgs)
+        {
+            StressNumber--;
+            if (StressNumber == 0)
+            {
+                StressTimer.Stop();
+                var parentConductor = (Conductor<object>)(this.Parent);
+                parentConductor.ActivateItem(new QuestionViewModel());
+
+            }
         }
 
         public void NextDef(object Object, EventArgs eventArgs)
