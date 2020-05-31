@@ -7,11 +7,21 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="#101010">
-        <StackPanel HorizontalAlignment="Center">
-            <TextBlock FontSize="70" Text="Streak" Style="{StaticResource DefaultText}"></TextBlock>
-            <Button Margin="10, 70, 10, 0" Height="50" Foreground="#5c5cd6" x:Name="OpenFileDialog">Play</Button>
-            <Button Margin="10, 30" Height="50" Foreground="#5c5cd6" x:Name="CreateButton">Create</Button>
-            <Button Margin="10, 0" Height="50" Foreground="#5c5cd6" x:Name="QuitButton">Quit</Button>
-        </StackPanel>    
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock FontSize="70" Text="Streak" Style="{StaticResource DefaultText}" Grid.Column="1" TextAlignment="Center"/>
+        <Button Margin="20" Height="60" Foreground="#5c5cd6" x:Name="OpenFileDialog" Grid.Column="1" Grid.Row="1">Play</Button>
+        <Button Margin="20" Height="60" Foreground="#5c5cd6" x:Name="CreateButton" Grid.Column="1" Grid.Row="2">Create</Button>
+        <Button Margin="20" Height="60" Foreground="#5c5cd6" x:Name="HelpButton" Grid.Column="1" Grid.Row="3">Help</Button> 
     </Grid>
 </UserControl>

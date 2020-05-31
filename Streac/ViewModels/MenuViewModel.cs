@@ -31,5 +31,11 @@ namespace Streac.ViewModels
             var parentConductor = (Conductor<object>)(this.Parent);
             parentConductor.ActivateItem(new CreateViewModel());
         }
+
+        public void HelpButton()
+        {
+            var parentConductor = (Conductor<object>)(this.Parent);
+            parentConductor.ActivateItem(new HelpViewModel());
+        }
     }
 }
